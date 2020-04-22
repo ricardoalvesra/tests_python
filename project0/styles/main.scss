@@ -1,0 +1,36 @@
+$textcolor: gray;
+
+h2, h4{
+    text-align: center;
+    color:$textcolor;
+    padding: 40px;
+}
+
+.newstitle{
+    color: darkred;
+    font-size: 20px;
+}
+
+.newstitle:hover{
+    color: red;
+}
+
+.newssummary{
+    font-size: 15px;
+}
+
+#videos{
+    span{
+        color: darkslategrey;
+        font-size: 20px;
+        font-style: oblique;
+        padding: 10px;
+    }
+}
+
+@media not print {
+    body {
+      background-color: rgb(240, 240, 240);
+    }
+  }
+
