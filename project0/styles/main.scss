@@ -1,9 +1,19 @@
 $textcolor: gray;
+$titlesize:20px;
 
-h2, h4{
+%text{
     text-align: center;
     color:$textcolor;
+}
+
+h2{
+    @extend %text;
     padding: 40px;
+}
+
+h4{
+    @extend %text;
+    padding: 30px;
 }
 
 td{
@@ -12,7 +22,7 @@ td{
 
 .newstitle{
     color: darkred;
-    font-size: 20px;
+    font-size: $titlesize;
 }
 
 .newstitle:hover{
@@ -26,7 +36,7 @@ td{
 #videos{
     span{
         color: darkslategrey;
-        font-size: 20px;
+        font-size: $textsize;
         font-style: oblique;
         padding: 10px;
     }
