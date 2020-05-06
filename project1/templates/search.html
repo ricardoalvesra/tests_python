@@ -1,29 +1,26 @@
+{% if logged %}
+{% extends "layoutlogged.html" %}
+{% else %}
 {% extends "layout.html" %}
+{% endif %}
 
 {% block title %}
-    Flights
+RA Books - Search
 {% endblock %}
 
 {% block body %}
-    <h1>Book a Flight</h1>
+<h1>Search a book review</h1>
+<form action="{{ url_for('search') }}" method="post">
+    <div class="form-group">
+        <input type="text" name="text" /> <button class="btn btn-primary">Search</button>
+    </div>  
+</form>
 
-    <form action="{{ url_for('book') }}" method="post">
+{% for book in books %}
+<div>
+<a href="{{ url_for('book',isbn=book.isbn) }}">{{ book.isbn }} - {{book.title}} - {{book.author}} - {{book.year}}</a>
+</div>    
+{% endfor %}
 
-        <div class="form-group">
-            <select class="form-control" name="flight_id">
-                {% for flight in flights %}
-                    <option value="{{ flight.id }}">{{ flight.origin }} to {{ flight.destination }}</option>
-                {% endfor %}
-            </select>
-        </div>
 
-        <div class="form-group">
-            <input class="form-control" name="name" placeholder="Passenger Name">
-        </div>
-
-        <div class="form-group">
-            <button class="btn btn-primary">Book Flight</button>
-        </div>
-
-    </form>
 {% endblock %}
