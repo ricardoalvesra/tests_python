@@ -2,19 +2,19 @@
 
 Web Programming with Python and JavaScript
 
-# import.py
+##### import.py
 
 Import csv file in database
 
-# application.py
+##### application.py
 
 Main website python file
 
-# templates
+##### templates
 
 HTML templates used in website. 
 All templates extends from layout.html.
 
-# static/css
+##### static/css
 
 Main stylesheet file
