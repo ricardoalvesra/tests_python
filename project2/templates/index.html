@@ -1,11 +1,81 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}
-RA Chat
-{% endblock %}
+<head>
+  <title>RA Chat</title>
 
-{% block body %}
-<div class="container section">
-    <h1>Welcome to RA Chat</h1>
-<div>
-{% endblock %}
+  <link rel="stylesheet" type="text/css" href="/static/main.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+</head>
+
+<body>
+  <div id="page">
+    <div class="fixed-top">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <span class="navbar-brand">RA Chat</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="channels">
+          <!-- <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button> -->
+          <!-- <ul class="navbar-nav" id="channels"> -->
+            
+            <!-- <li class="nav-item"><a class="nav-link active" href="#">GENERAL</a></li> -->
+          <!-- </ul> -->
+        </div>
+
+        <!-- <form class="form-inline my-2 my-lg-0"> -->
+        <div>
+          <input class="form-control mr-sm-2" type="search" placeholder="Create a new channel" aria-label=""
+            id="txtchannel">
+        </div>
+        <!-- </form> -->
+      </nav>
+    </div>
+
+    <div class="messageblock" id="messages">
+      <!-- <table class="message">
+        <tr>
+          <td>
+            name - time 1
+          </td>
+        </tr>
+        <tr>
+          <td>
+            message
+          </td>
+        </tr>
+      </table> -->
+    </div>
+
+    <div class="fixed-bottom">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Type here..." name="text" id="txtmessage" required />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" id="btnsend" type="submit">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
