@@ -19,24 +19,23 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#channels').innerHTML = '';
 
         data.forEach(element => {
-            if (!window.localStorage.currentChannel)
-                window.localStorage.currentChannel = element.name;
 
             document.querySelector('#channels').insertAdjacentHTML('beforeend',
                 '<button class="btn btn-sm btn-outline-secondary" type="button" id="channel_' + element.name + '">' + element.name + '</button>');
 
-            document.querySelector("#channel_" + element.name).onclick = () => {
-                window.localStorage.currentChannel = element.name;
+            if (document.querySelector("#channel_" + element.name))
+                document.querySelector("#channel_" + element.name).onclick = () => {
+                    window.localStorage.currentChannel = element.name;
 
-                let items = document.querySelectorAll("[id^='channel_']");
-                items.forEach(element => {
-                    element.className = "btn btn-sm btn-outline-secondary";
-                });
+                    let items = document.querySelectorAll("[id^='channel_']");
+                    items.forEach(element => {
+                        element.className = "btn btn-sm btn-outline-secondary";
+                    });
 
-                document.querySelector("#channel_" + element.name).className = "btn btn-outline-success";
+                    document.querySelector("#channel_" + element.name).className = "btn btn-outline-success";
 
-                socket.emit('send message', { 'channel': '', 'message': '' });
-            }
+                    socket.emit('send message', { 'channel': '', 'message': '' });
+                }
         });
 
         let currentChannel = window.localStorage.currentChannel;

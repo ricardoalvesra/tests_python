@@ -72,7 +72,7 @@ def addmessage(channel, message):
     for c in channels:
         if c["name"] == channel:
             c["messages"].append({
-                'sender': session.get("username") + ' - ' + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+                'sender': session["username"] + ' - ' + datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
                 'text': message
             })
 
