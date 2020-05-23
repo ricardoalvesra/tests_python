@@ -1,3 +1,5 @@
+window.localStorage.currentChannel = "GENERAL"
+
 function scrollToBottom() {
     let scrollingElement = (document.scrollingElement || document.body);
     scrollingElement.scrollTop = scrollingElement.scrollHeight;
