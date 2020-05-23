@@ -13,14 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         socket.emit('send message', { 'channel': '', 'message': '' });
     });
 
-    // When a new vote is announced, add to the unordered list
     socket.on('channels', data => {
-        // if (data.channelconnected == connectedChannel()) {
-        // var connectedChannel = 0
-        // var items = document.querySelectorAll(".btn-outline-success");
-        // if (items.length > 0)
-        //     connectedChannel = parseInt(items[0].dataset.code);
-
         document.querySelector('#channels').innerHTML = '';
 
         data.forEach(element => {
@@ -46,15 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector("#channel_" + currentChannel).className = "btn btn-outline-success";
         else
             document.querySelectorAll("[id^='channel_']")[0].className = "btn btn-outline-success";
-
-
-        // if (connectedChannel != 0)
-        //     document.querySelectorAll(".btn.btn-sm.btn-outline-secondary")[connectedChannel].className = "btn btn-outline-success";
-
-        // let items2 = document.querySelectorAll(".btn-outline-success");
-        // if (items2.length == 0)
-        //     document.querySelectorAll(".btn.btn-sm.btn-outline-secondary")[0].className = "btn btn-outline-success";
-
     });
 
     socket.on('messages', data => {
