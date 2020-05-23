@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#channels').innerHTML = '';
 
         data.forEach(element => {
+            if (!window.localStorage.currentChannel)
+                window.localStorage.currentChannel = element.name;
+
             document.querySelector('#channels').insertAdjacentHTML('beforeend',
                 '<button class="btn btn-sm btn-outline-secondary" type="button" id="channel_' + element.name + '">' + element.name + '</button>');
 
@@ -39,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector("#channel_" + currentChannel).className = "btn btn-outline-success";
         else
             document.querySelectorAll("[id^='channel_']")[0].className = "btn btn-outline-success";
+
+        socket.emit('send message', { 'channel': '', 'message': '' });
     });
 
     socket.on('messages', data => {
@@ -51,7 +56,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#messages').innerHTML = '';
 
         messages.forEach(element => {
-            document.querySelector('#messages').insertAdjacentHTML('beforeend', '<table class="message"><tr><td>' + element.sender + '</td></tr><tr><td>' + element.text + '</td></tr></table>');
+            var filter = document.querySelector("#txtsearch").value;
+            if (element.text.includes(filter))
+                document.querySelector('#messages').insertAdjacentHTML('beforeend', '<table class="message"><tr><td>' + element.sender + '</td></tr><tr><td>' + element.text + '</td></tr></table>');
         });
 
         scrollToBottom();
@@ -68,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let message = document.querySelector('#txtmessage').value;
         socket.emit('send message', { 'channel': window.localStorage.currentChannel, 'message': message })
         document.querySelector('#txtmessage').value = '';
+        document.querySelector('#txtsearch').value = '';
     }
 
     document.querySelector('#txtmessage').onkeyup = (event) => {
@@ -75,6 +83,13 @@ document.addEventListener('DOMContentLoaded', function () {
             let message = document.querySelector('#txtmessage').value;
             socket.emit('send message', { 'channel': window.localStorage.currentChannel, 'message': message })
             document.querySelector('#txtmessage').value = '';
+            document.querySelector('#txtsearch').value = '';
+        }
+    }
+
+    document.querySelector('#txtsearch').onkeyup = (event) => {
+        if (event.keyCode === 13) {
+            socket.emit('send message', { 'channel': '', 'message': '' });
         }
     }
 
