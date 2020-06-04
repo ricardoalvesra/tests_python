@@ -1,5 +1,9 @@
 from django.db import models
 
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 class ProductCategory(models.Model):
     name = models.CharField(max_length=50)
 
@@ -54,4 +58,11 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product} - {self.price}"
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "password1", "password2"]
 
