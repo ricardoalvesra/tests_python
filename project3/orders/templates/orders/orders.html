@@ -1,0 +1,44 @@
+{% extends "orders/base.html" %}
+
+{% block extrahead %}
+<meta http-equiv="refresh" content="5">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div>
+        <h3>Orders</h3>
+        {% for item in orders %}
+        <h5>ORDER ID: {{item.pk}}</h5>
+        <span>Customer: {{item.customer}}</span><br>
+        <span>Description: {{item.description}}</span><br>
+        <span>Total: {{item.total}}</span><br>
+        <span>Status: {{item.status}}</span><br>
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <form action="{% url 'orders' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="Confirmed" name="status">
+                        <input type="hidden" value="{{item.pk}}" name="item">
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Confirmed</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{% url 'orders' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="Delivered" name="status">
+                        <input type="hidden" value="{{item.pk}}" name="item">
+                        <button type="submit" class="btn btn-sm btn-outline-success">Delivered</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <br>
+        {% empty %}
+        <h4>No orders.</h4>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>Pinocchio's Pizza & Subs</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -22,26 +22,48 @@
         crossorigin="anonymous"></script>
 
     <script src="{% static 'orders/scripts.js' %}"></script>
+
+    {% block extrahead %}
+    {% endblock %}
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-        <span class="navbar-brand">RA News</span>
+    <nav class="navbar navbar-expand-xl navbar-dark " style="background-color: #239346;">
+        <span class="navbar-brand">Pinocchio's Pizza & Subs</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="/">home</a></li>
+
+                {% comment %} <li class="nav-item"><a class="nav-link" href="/">home</a></li> {% endcomment %}
+
+                {% if is_authenticated and is_admin %}
+                <li class="nav-item"><a class="nav-link" href="/orders">orders</a></li>
+                {% endif %}
+
+                {% if is_authenticated and not is_admin %}
                 <li class="nav-item"><a class="nav-link" href="/menu">menu</a></li>
+                {% endif %}
+
+                {% if is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                {% else %}
                 <li class="nav-item"><a class="nav-link" href="/">login</a></li>
                 <li class="nav-item"><a class="nav-link" href="/register">register</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
     <div class="container">
+        {% if is_authenticated %}
+        <br>
+        <h4>Hi {{ user.username }}!</h4>
+        <br>
+        {% endif %}
+
         {% block content %}
         {% endblock %}
     </div>

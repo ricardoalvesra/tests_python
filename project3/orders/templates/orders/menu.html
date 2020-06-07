@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-5">
             <h3>Menu</h3>
             {% for item in menu %}
             <div>
@@ -20,15 +20,16 @@
                     {% endif %}
                 </div>
                 <div id="item{{ item.categoryid }}_{{ product.id }}" class="collapse">
-                    <form action="{% url 'additem' %}" method="post" class="formadditem border rounded">
+                    <form action="{% url 'menu' %}" method="post" class="formadditem border rounded">
                         {% csrf_token %}
 
-                        <b>Size</b>
+                        <input type="hidden" value="{{product.id}}" name="product">
+
+                        <b>Options</b>
                         <br>
 
                         {% for price in product.prices%}
-                        <input type="radio" name="size" id="size{{item.categoryid}}_{{product.id}}_{{price.id}}"
-                            value="size{{item.categoryid}}_{{product.id}}_{{price.id}}">
+                        <input type="radio" name="size" id="size_{{price.id}}" value="{{price.id}}" checked="checked">
                         <label for="male">{{price.size}} - {{price.price}}</label>
                         <br>
                         {% endfor %}
@@ -39,7 +40,8 @@
                         <br>
 
                         {% for extra in product.extras %}
-                        <input type="checkbox" value="extra_{{item.categoryid}}_{{product.id}}_{{extra.id}}" name="extra" id="extra_{{item.categoryid}}_{{product.id}}_{{extra.id}}">
+                        <input type="checkbox" value="{{extra.id}}" name="extra"
+                            id="extra_{{item.categoryid}}_{{product.id}}_{{extra.id}}">
                         <label>{{extra.name}}</label><br>
 
                         {% endfor %}
@@ -51,17 +53,38 @@
                         <input type="number" min="1" max="10" name="quantity" value="1" />
                         <br />
                         <br>
-                        <input type="submit" value="Add" class="btn btn-primary">
+                        <input type="submit" value="Add" class="btn btn-sm btn-outline-primary">
                     </form>
                 </div>
                 {% endfor %}
             </div>
             {% endfor %}
         </div>
-        <div class="col-2">
+        <div class="col-1">
         </div>
-        <div class="col-4">
-            <h3>Your Order</h3>
+        <div class="col-6">
+            {% if order.items %}
+            <div>
+                <h3>My Order</h3>
+                {% for item in order.items %}
+                <form action="{% url 'removeitem' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{item.id}}" name="item">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">X</button> {{item.description}}
+                </form>
+                {% endfor %}
+                <br>
+                <b>Total:</b> {{order.total}}
+            </div>
+            <br>
+            <div>
+                <form action="{% url 'confirmation' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success">Place Order</button>
+                </form>
+            </div>
+
+            {% endif %}
         </div>
     </div>
 </div>

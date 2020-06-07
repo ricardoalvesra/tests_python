@@ -34,31 +34,14 @@ class PriceList(models.Model):
     def __str__(self):
         return f"{self.product}"
 
-# class Customer(models.Model):
-#     firstname = models.CharField(max_length=50)
-#     lastname = models.CharField(max_length=50)
-#     emailaddress = models.CharField(max_length=50)
-#     username = models.CharField(max_length=50)
-#     password = models.CharField(max_length=50)
-
-#     def __str__(self):
-#         return f"{self.firstname} - {self.lastname}"
-
 class Order(models.Model):
     customer = models.CharField(max_length=50)
+    description = models.CharField(max_length=1000)
     total = models.DecimalField(decimal_places=2,max_digits=10)
+    status = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"{self.customer} - {self.total}"
-
-class OrderItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="productorderitem")
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="orderorderitem")
-    price = models.DecimalField(decimal_places=2,max_digits=10)
-    extras = models.ManyToManyField(ProductExtra, blank=True, related_name="productextras")
-
-    def __str__(self):
-        return f"{self.product} - {self.price}"
+        return f"{self.customer} - {self.description} - {self.total} - {self.status}"
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
