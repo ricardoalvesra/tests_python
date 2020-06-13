@@ -1,0 +1,19 @@
+{% extends "orders/base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div>
+        <h3>Confirmation!</h3>
+        {% for item in order.items %}
+        <span>{{item.description}}</span><br>
+        {% endfor %}
+        <br>
+        <b>Total:</b> {{order.total}}
+        <br>
+        <br>
+        <h3>Order ID: {{orderid}}</h3>
+    </div>
+</div>
+{% endblock %}
