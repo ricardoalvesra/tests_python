@@ -1,4 +1,4 @@
-# Project 3
+# Project 4
 
 Web Programming with Python and JavaScript
 
@@ -14,7 +14,7 @@ routes
 
 class and django models
 
-## template/orders
+## template
 
 html views
 
