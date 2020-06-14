@@ -2,6 +2,8 @@
 
 Web Programming with Python and JavaScript
 
+RA CRM v0.1
+
 ## view.py
 
 views and methods
@@ -21,3 +23,4 @@ html views
 ## static
 
 css style sheet file
+javascript file

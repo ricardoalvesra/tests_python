@@ -1,29 +1,48 @@
-$(document).ready(function () {
-    $('.minus').click(function () {
-        var $input = $(this).parent().find('input');
-        var count = parseInt($input.val()) - 1;
-        count = count < 1 ? 1 : count;
-        $input.val(count);
-        $input.change();
-        return false;
-    });
-    $('.plus').click(function () {
-        var $input = $(this).parent().find('input');
-        $input.val(parseInt($input.val()) + 1);
-        $input.change();
-        return false;
-    });
-});
+function loadCustomer() {
+    $(function () {
+        $("#jsGrid").jsGrid({
+            height: "100%",
+            width: "100%",
 
-function getData() {
-    var response;
+            //filtering: true,
+            //editing: false,
+            sorting: true,
+            //paging: true,
+            //autoload: true,
+
+            pageSize: 15,
+            pageButtonCount: 5,
+
+            data: getCustomers(),
+            fields: [
+                { name: "name", type: "text", width: 50, title: "Name" },
+                { name: "address", type: "text", width: 50, title: "Address" },
+                { name: "postalcode", type: "text", width: 50, title: "Postal Code" },
+                { name: "county", type: "text", width: 50, title: "County" },
+                { name: "telephone", type: "text", width: 50, title: "Telephone" },
+                { name: "email", type: "text", width: 50, title: "Email" }
+            ],
+
+            rowClick: function (e) {
+                window.location = "/customer/" + e.item.id;
+            }
+        });
+    });
+}
+
+function getCustomers() {
+    var response = [];
     $.ajax({
         async: false,
         type: "GET",
-        url: "http://127.0.0.1:8000/get_data",
+        url: "/getcustomers",
         dataType: "json",
         success: function (data) {
-            response = data;
+            let obj = JSON.parse(data);
+            obj.forEach(element => {
+                element.fields["id"] = element.pk;
+                response.push(element.fields);
+            });
         },
         error: function (e) {
             console.log(e);

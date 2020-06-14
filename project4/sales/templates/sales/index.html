@@ -1,9 +1,11 @@
 {% extends "sales/base.html" %}
 
 {% block content %}
-<h1>Hello, {{ user.first_name }}</h1>
+<h4>Welcome to RA CRM!</h4>
 <ul>
-    <li>Currently logged in as: {{ user.username }}</li>
-    <li><a href="{% url 'logout' %}">Logout</a></li>
+    <small class="text-muted">
+        <li>Currently logged in as: {{ user.username }}</li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </small>
 </ul>
 {% endblock %}

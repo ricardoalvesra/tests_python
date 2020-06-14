@@ -1,0 +1,16 @@
+{% extends "sales/base.html" %}
+
+{% block content %}
+
+<h4>Customers</h4>
+<br>
+<div>
+    <form action="{% url 'customer' %}">
+        <input type="submit" value="New" class="btn btn-primary">
+    </form>
+</div>
+<br>
+<div id="jsGrid"></div>
+<script>loadCustomer();</script>
+
+{% endblock %}

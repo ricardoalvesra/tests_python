@@ -6,13 +6,9 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("login", views.login_view, name="login"),
     path("logout", views.logout_view, name="logout"),
+    path("customers", views.customers, name="customers"),
+    path("getcustomers", views.get_customers, name="get_customers"),
     path("customer", views.customer, name="customer"),
-    path("opportunity", views.opportunity, name="opportunity"),
-    path("get_data", views.get_data, name="get_data")
-
-    # path("menu", views.menu, name="menu"),
-    # path("removeitem", views.removeitem, name="removeitem"),
-    # path("confirmation", views.confirmation, name="confirmation"),
-    # path("orders", views.orders, name="orders")
-
+    path("customer/<int:customer_id>", views.customer_by_id, name="customer_by_id"),
+    path("delete_customer", views.delete_customer, name="delete_customer")
 ]

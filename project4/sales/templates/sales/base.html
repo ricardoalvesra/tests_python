@@ -24,6 +24,12 @@
 
     <script src="{% static 'sales/scripts.js' %}"></script>
 
+
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+     
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+
     {% block extrahead %}
     {% endblock %}
 </head>
@@ -39,23 +45,17 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 {% if is_authenticated %}                
-                <li class="nav-item"><a class="nav-link" href="/">dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="/opportunity">opportunity</a></li>
-                <li class="nav-item"><a class="nav-link" href="/customer">customer</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+               <li class="nav-item"><a class="nav-link" href="/customers">CUSTOMERS</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout">LOGOUT</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="/">login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">LOGIN</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
     <div class="container">
-        {% if is_authenticated %}
-        <br>
-        <h4>Hi {{ user.username }}!</h4>
-        <br>
-        {% endif %}
-
+    <br>
         {% block content %}
         {% endblock %}
     </div>
